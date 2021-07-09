@@ -1,0 +1,143 @@
+<div class="container">
+    <h1><b>Registration</b></h1>
+    <form #registerForm="ngForm">
+      <div *ngIf="status == 500" class="alert alert-danger" role="alert">
+        {{ msg }}
+      </div>
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="firstname">First Name*</label>
+                <input type="text" class="form-control" placeholder="Enter First Name" id="firstname" name="firstName"
+                required [(ngModel)]="user.firstName" #firstname ="ngModel" [class.is-invalid]="firstname.invalid && firstname.touched"
+                >
+                <small class="text-danger" [class.d-none]="firstname.valid || firstname.untouched">
+                  First Name is required field
+                </small>
+              </div>
+              <div class="form-group col-md-6">
+                <label for="lastname">Last Name*</label>
+                <input type="text" class="form-control" placeholder="Enter Last Name" name="lastName" id="lastname"
+                required [(ngModel)]="user.lastName" #lastname ="ngModel" [class.is-invalid]="lastname.invalid && lastname.touched"
+                >
+                <small class="text-danger" [class.d-none]="lastname.valid || lastname.untouched">
+                  Last Name is required field
+                </small>
+            </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <label for="exampleInputEmail1">Email address*</label>
+            <input type="email" placeholder="username@gmail.com" class="form-control" id="exampleInputEmail1" name="email" aria-describedby="emailHelp" 
+            [(ngModel)]="user.emailId" required #email="ngModel" [class.is-invalid]="email.invalid && email.touched"
+            
+            >
+            <div *ngIf="email.errors && (email.invalid && email.touched)">
+              <small class="text-danger" *ngIf="email.errors.required">Email Id is required field</small>
+            
+            </div>
+          </div>
+          <div class="form-group col-md-6">
+            <label for="phone1">Telephone Number*</label>
+            <input type="text" maxlength="15" placeholder="Enter Telephone Number" class="form-control" id="phone1" name="phone"
+            required [(ngModel)]="user.telephone" #telephone ="ngModel" [class.is-invalid]="telephone.invalid && telephone.touched"
+            >
+            <small class="text-danger" [class.d-none]="telephone.valid || telephone.untouched">
+              Telephone Number is required field
+            </small>
+          </div>     
+        </div>
+        <div class="form-group">
+          <label for="inputAddress">Address*</label>
+          <input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St" name="address1"
+          required [(ngModel)]="user.addressOne" #addressone ="ngModel" [class.is-invalid]="addressone.invalid && addressone.touched"
+          >
+          <small class="text-danger" [class.d-none]="addressone.valid || addressone.untouched">
+            Address is required field
+          </small>
+        </div>
+        <div class="form-group">
+          <label for="inputAddress2">Other Address</label>
+          <input type="text" class="form-control" id="inputAddress2" placeholder="Apartment, studio, or floor" name="address2"
+          [(ngModel)]="user.addressTwo" #addressTwo ="ngModel"
+          >
+        </div>
+        <div class="form-group">
+            <label for="inputCity">City*</label>
+            <input type="text" placeholder="Enter City" class="form-control" id="inputCity" name="inputcity"
+            required [(ngModel)]="user.city" #city ="ngModel" [class.is-invalid]="city.invalid && city.touched"
+            > 
+            <small class="text-danger" [class.d-none]="city.valid || city.untouched">
+              City is required field
+            </small>
+        </div>
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <label for="inputcountry">Country*</label>
+            <select id="inputcountry" name="c1" class="form-control" (change)="changeCountry($event.target.value)"
+            required [(ngModel)]="user.country" #country ="ngModel" [class.is-invalid]="country.invalid && country.touched"
+            >
+              <option *ngFor="let x of Countries">{{ x.country }}</option>
+            </select>
+            <small class="text-danger" [class.d-none]="country.valid || country.untouched">
+              Country is required field
+            </small>
+          </div>
+          <div class="form-group col-md-4">
+            <label for="inputState">State*</label>
+            <select id="inputState" name="s1" class="form-control" 
+            required [(ngModel)]="user.state" #state ="ngModel" [class.is-invalid]="state.invalid && state.touched"
+            >
+              <option *ngFor="let state of States">{{state}}</option>>
+            </select>
+            <small class="text-danger" [class.d-none]="state.valid || state.untouched">
+              State is required field
+            </small>
+          </div>
+          <div class="form-group col-md-2">
+            <label for="inputZip">Zip*</label>
+            <input type="text" name="zip" class="form-control" placeholder="Enter PinCode" id="inputZip" 
+            required [(ngModel)]="user.zip" #zip ="ngModel" [class.is-invalid]="zip.invalid && zip.touched"
+            >
+            <small class="text-danger" [class.d-none]="zip.valid || zip.untouched">
+              Zip is required field
+            </small>
+          </div>
+        </div>
+        <!-- <button [disabled]="registerForm.form.invalid" type="submit" class="btn btn-primary">Sign Up</button> -->
+        <button [disabled]="registerForm.form.invalid" data-toggle="modal" data-target="#exampleModalLong" class="btn btn-primary">Sign Up</button>
+        <small class="float-right btextual vishav-click" [routerLink]="['/login']"><b><font size="3"><u>Existing User? Login Here</u></font></b></small>
+    </form>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Please Check Your Details</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p class="text-center">Thankyou !! {{ user.firstName }} for registering.</p>
+        <p class="text-center">Check Your email({{ user.emailId }} for USERNAME and PASSWORD.</p>
+        <p class="text-center">First Name : {{ user.firstName }}</p>
+        <p class="text-center">Last Name : {{ user.lastName }}</p>
+        <p class="text-center">Email address : {{ user.emailId }}</p>
+        <p class="text-center">Telephone Number : {{ user.telephone }}</p>
+        <p class="text-center">Address : {{ user.addressOne }}</p>
+        <p *ngIf="user.addressTwo != '' " class="text-center">Other Address : {{ user.addressTwo }}</p>
+        <p class="text-center">City : {{ user.city }}</p>
+        <p class="text-center">Country : {{ user.country }}</p>
+        <p class="text-center">State : {{ user.state }}</p>
+        <p class="text-center">Zip : {{ user.zip }}</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-warning" (click)="PrintContent()">Print</button>
+        <button type="submit" class="btn btn-primary" (click)="registerUser()" data-dismiss="modal" >Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+</div>

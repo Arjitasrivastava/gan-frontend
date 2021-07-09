@@ -1,0 +1,25 @@
+*{color:black ;}
+.bg{
+    background-image: url("https://www.piczasso.com/wp-content/uploads/2020/02/ai-healthcare.jpg");
+    background-repeat: no-repeat;
+    height: 100%;
+    width: 100%;
+}
+.form-container{
+    border: 0px solid #fff;
+    padding: 50px 60px;
+    margin-top: 20vh;
+    -webkit-box-shadow: -1px 4px 26px 11px rgba(0,0,0,0.75);
+    -moz-box-shadow: -1px 4px 26px 11px rgba(0,0,0,0.75);
+    box-shadow: -1px 4px 26px 11px rgba(0,0,0,0.75);;
+
+
+}
+
+.vishav-click{
+    cursor: pointer;
+}
+
+h1{
+    text-align: center;
+}
